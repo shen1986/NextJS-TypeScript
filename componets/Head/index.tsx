@@ -6,7 +6,7 @@ function MyHead({title}) {
             {/* 魔笙科技 AI服务商 */}
             <title>{title}</title>
             <meta name="viewport" content="width=device-width"/>
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+            <meta httpEquiv="Content-Type" content="text/html; charset=utf-8"/>
             <meta name="description" content="魔笙科技公司主页"/>
             <meta name="keywords" content="AIoT；魔笙科技；AI服务商；智慧校园；智慧培训机构；获客；物联网；智能会议；智能抓拍系统；AI解决方案服务商"/>
             <meta name="renderer" content="webkit"/>

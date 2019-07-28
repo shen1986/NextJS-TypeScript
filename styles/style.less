@@ -1,4 +1,44 @@
-@font-size: 50px;
-.example {
-  font-size: @font-size;
+// 全局式样
+body, button, input, select, textarea {
+  font: 12px/1 "Microsoft YaHei","微软雅黑","arial","tahoma","MicrosoftJhengHei";
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased!important;
 }
+
+ul, li, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none outside none;
+}
+
+// 全局布局式样
+.ant-layout-header {
+  display: flex;
+}
+ .logo {
+  width: "184px";
+  height: "45px";
+  display: inline-block;
+}
+.ant-menu {
+  margin-left: 184px
+}
+
+.ant-layout-content {
+  padding: 0!important;
+}
+
+.ant-layout-footer {
+  height: 222px;
+  width: 100%;
+  background: #001529;
+
+  .footer-body {
+    color: #fff;
+    // height: 222px;
+    // width: 100%;
+    // background: #ccc;
+  }
+}
+
