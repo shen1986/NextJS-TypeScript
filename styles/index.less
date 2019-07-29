@@ -3,3 +3,40 @@
         width: 100%;
     }
 }
+
+.svg() {
+    text-align: center;
+    margin-top: 11px;
+}
+
+.carousel {
+    position: relative;
+
+    .anticon {
+        color: #fff;
+        background: #ccc;
+        width: 20px;
+        height: 35px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        display: block;
+        z-index: 10;
+    }
+
+    .anticon-left {
+        left: 5px;
+
+        svg {
+            .svg();
+        }
+    }
+
+    .anticon-right {
+        right: 5px;
+
+        svg {
+            .svg();
+        }
+    }
+}

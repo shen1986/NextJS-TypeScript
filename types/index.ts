@@ -1,3 +1,4 @@
-export interface IProps {
-    test: string;
+export interface TitleEventEntity {
+    key: string;
+    domEvent: Event;
 }

@@ -1,9 +1,17 @@
-import { Layout as MyLayout, Menu, Icon } from 'antd';
+import { Layout as MyLayout, Menu , Icon } from 'antd';
+import { TitleEventEntity } from '../../types';
 import '../../styles/style.less';
+import { useCallback } from 'react';
 
 const { Header, Content, Footer } = MyLayout;
+const { SubMenu } = Menu;
 
 function Layout({ children }: {children: any}) {
+    const onTitleClick = useCallback((e: TitleEventEntity) => {
+        console.log(e);
+
+    },                               []);
+
     return (
         <MyLayout className="layout">
             <Header style={{ position: 'fixed', zIndex: 1, width: '100%', height: 68 }}>
@@ -15,16 +23,27 @@ function Layout({ children }: {children: any}) {
                         />
                     </a>
                 </div>
-                <Menu
-                    theme="dark"
-                    mode="horizontal"
-                    defaultSelectedKeys={['2']}
-                    style={{ lineHeight: '68px' }}
-                >
-                    <Menu.Item key="1">nav 1</Menu.Item>
-                    <Menu.Item key="2">nav 2</Menu.Item>
-                    <Menu.Item key="3">nav 3</Menu.Item>
-                </Menu>
+                <div className="menu">
+                    <Menu
+                        theme="dark"
+                        mode="horizontal"
+                        defaultSelectedKeys={['1']}
+                        style={{ lineHeight: '68px' }}
+                    >
+                        <SubMenu
+                            key="sub1"
+                            title={
+                                <span>
+                                    产品服务
+                                </span>
+                            }
+                            onTitleClick={onTitleClick}
+                        >
+                            <Menu.Item key="1">身份识别</Menu.Item>
+                            <Menu.Item key="2">人脸识别</Menu.Item>
+                        </SubMenu>
+                    </Menu>
+                </div>
             </Header>
             <Content style={{ padding: '0 50px', marginTop: 64 }}>
                 <div style={{ background: '#fff', minHeight: 380 }}>{children}</div>
@@ -54,8 +73,8 @@ function Layout({ children }: {children: any}) {
                         </li>
                     </ul>
                     <div className="w-company-info iconStyle1">
-                        <span></span>
-                        <span></span>
+                        <span>版权所有： 上海魔笙科技有限公司</span>
+                        <span>备案号： 京ICP备2018xxxx号</span>
                     </div>
                 </div>
             </Footer>
