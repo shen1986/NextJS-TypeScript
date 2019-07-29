@@ -1,15 +1,18 @@
-import { Layout as MyLayout, Menu, Breadcrumb, Icon } from 'antd';
+import { Layout as MyLayout, Menu, Icon } from 'antd';
 import '../../styles/style.less';
 
 const { Header, Content, Footer } = MyLayout;
 
-function Layout({children}: {children: any}) {
+function Layout({ children }: {children: any}) {
     return (
         <MyLayout className="layout">
             <Header style={{ position: 'fixed', zIndex: 1, width: '100%', height: 68 }}>
                 <div className="logo" >
                     <a target="_self" href="/sy">
-                        <img src="//nwzimg.wezhan.cn/contents/sitefiles2025/10129049/images/4683947.png" alt="魔笙科技" title="魔笙科技" style={{ width: "184px", height: "45px" }} />
+                        <img
+                        src="//nwzimg.wezhan.cn/contents/sitefiles2025/10129049/images/4683947.png"
+                            alt="魔笙科技" title="魔笙科技" style={{ width: '184px', height: '45px' }}
+                        />
                     </a>
                 </div>
                 <Menu
@@ -57,7 +60,7 @@ function Layout({children}: {children: any}) {
                 </div>
             </Footer>
         </MyLayout>
-    )
+    );
 }
 
 export default Layout;

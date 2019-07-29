@@ -1,4 +1,4 @@
-import MyHead from '../componets/Head';
+import MyHead from '../components/Head';
 import { Carousel } from 'antd';
 import '../styles/index.less';
 
@@ -9,14 +9,18 @@ function Home() {
             <Carousel autoplay dots={false} speed={500} infinite={true} nextArrow={<span>l</span>}
                       prevArrow= {<span>></span>} >
                 <div>
-                    <img src="http://ntemimg.wezhan.cn/contents/sitefiles2001/10007281/images/-33833.jpg" />
+                    <img
+                    src="http://ntemimg.wezhan.cn/contents/sitefiles2001/10007281/images/-33833.jpg"
+                    />
                 </div>
                 <div>
-                    <img src="http://ntemimg.wezhan.cn/contents/sitefiles2001/10007281/images/-33832.jpg" />
+                    <img
+                    src="http://ntemimg.wezhan.cn/contents/sitefiles2001/10007281/images/-33832.jpg"
+                    />
                 </div>
             </Carousel>
         </div>
     );
 }
 
-export default Home
+export default Home;

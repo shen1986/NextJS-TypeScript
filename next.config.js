@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const withLess = require('@zeit/next-less')
 const withBundleAnalyzer = require("@zeit/next-bundle-analyzer");
-const lessToJS = require('less-vars-to-js')
 // const config = require('./config');
 
 const configs = {
@@ -50,10 +49,6 @@ const configs = {
         staticFolder: '/static'
     },
 }
-
-// if (typeof require !== 'undefined') {
-//     require.extensions['.css'] = file => {}
-// }
 
 module.exports = withBundleAnalyzer(
   withLess({

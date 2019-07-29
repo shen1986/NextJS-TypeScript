@@ -1,3 +1,3 @@
-export interface prop {
+export interface IProps {
     test: string;
 }
