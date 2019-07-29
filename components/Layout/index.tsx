@@ -1,6 +1,5 @@
 import { Layout as MyLayout, Menu , Icon } from 'antd';
 import { TitleEventEntity } from '../../types';
-import '../../styles/style.less';
 import { useCallback } from 'react';
 
 const { Header, Content, Footer } = MyLayout;

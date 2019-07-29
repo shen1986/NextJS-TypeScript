@@ -2,6 +2,7 @@ import React from 'react';
 import App, { Container } from 'next/app';
 import { Provider } from 'mobx-react';
 import Layout from '../components/Layout';
+import '../styles/style.less'; // 全局式样
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
