@@ -22,7 +22,7 @@ class Home extends Component<any, any> {
 
         console.log('mobxStore', mobxStore);
         if (appState) {
-            appState.add(15);
+            appState.add(10);
         }
 
         return { };

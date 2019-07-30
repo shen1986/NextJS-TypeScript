@@ -8,10 +8,11 @@
     "dev": "next",
     "build": "cross-env NODE_ENV=production next build",
     "start": "next start",
-    "server": "cross-env NODE_ENV=production node server.js",
-    "startByO": "cross-env NODE_ENV=production node server.js",
     "export": "next export",
-    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
+    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build",
+    "server:dev": "nodemon",
+    "server:build": "next build && tsc --project tsconfig.server.json",
+    "server:start": "cross-env NODE_ENV=production node dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -46,7 +47,9 @@
     "babel-plugin-styled-components": "^1.10.6",
     "cross-env": "^5.2.0",
     "less": "^3.9.0",
+    "nodemon": "^1.19.1",
     "prettier": "^1.18.2",
+    "ts-node": "^8.3.0",
     "tslint": "^5.18.0",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-loader": "^3.5.4",
