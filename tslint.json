@@ -9,5 +9,5 @@
     "import-name": false,
     "function-name": false
   },
-  "rulesDirectory": ["components","pages","types","store"]
+  "rulesDirectory": ["components","pages","types","store","lib"]
 }

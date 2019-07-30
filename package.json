@@ -8,6 +8,7 @@
     "dev": "next",
     "build": "cross-env NODE_ENV=production next build",
     "start": "next start",
+    "server": "cross-env NODE_ENV=production node server.js",
     "startByO": "cross-env NODE_ENV=production node server.js",
     "export": "next export",
     "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
@@ -25,6 +26,8 @@
   "homepage": "https://github.com/shen1986/NextJS-TypeScript#readme",
   "dependencies": {
     "antd": "^3.20.7",
+    "koa": "^2.7.0",
+    "koa-router": "^7.4.0",
     "mobx": "^5.13.0",
     "mobx-react": "^6.1.1",
     "next": "^9.0.2",
