@@ -1,33 +1,55 @@
 import MyHead from '../components/Head';
 import { Carousel, Icon } from 'antd';
-import { useRef, useCallback } from 'react';
+import { Component } from 'react';
+import { inject, observer } from 'mobx-react';
 import '../styles/index.less';
 
-function Home() {
-    const carousel = useRef(null);
+@inject((stores) => {
+    return {
+        appState: (stores as any).appState,
+    };
+})
+@observer
+class Home extends Component<any, any> {
+    constructor(props) {
+        super(props);
+        console.log(this.props.appState.count);
+    }
 
-    const onClick = useCallback(
-        (direction: string) => {
-            if (direction === 'prev') {
-                (carousel.current as any).prev();
-            } else {
-                (carousel.current as any).next();
-            }
-        },
-        [carousel],
-    );
+    static async getInitialProps({ mobxStore }) {
 
-    return (
+        const appState = mobxStore;
+
+        if (appState) {
+            appState.add();
+        }
+
+        return { };
+    }
+
+    onClick(direction: string) {
+        const { carousel } = this.refs;
+        if (direction === 'prev') {
+            (carousel as any).prev();
+        } else {
+            (carousel as any).next();
+        }
+        this.props.appState.add();
+        console.log(this.props.appState.count);
+    }
+
+    render() {
+        return (
         <div className="home">
             <MyHead title="魔笙科技 AI服务商"/>
             <div className="carousel">
-                <Icon type="left" onClick={() => onClick('prev')} />
+                <Icon type="left" onClick={() => this.onClick('prev')} />
                 <Carousel
                     autoplay
                     dots={false}
                     speed={500}
                     infinite={true}
-                    ref={carousel}
+                    ref="carousel"
                 >
                     <div>
                         <img
@@ -40,10 +62,11 @@ function Home() {
                         />
                     </div>
                 </Carousel>
-                <Icon type="right" onClick={() => onClick('next')} />
+                <Icon type="right" onClick={() => this.onClick('next')} />
             </div>
         </div>
-    );
+        );
+    }
 }
 
 export default Home;

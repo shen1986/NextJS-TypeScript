@@ -2,10 +2,12 @@ import React from 'react';
 import App, { Container } from 'next/app';
 import { Provider } from 'mobx-react';
 import Layout from '../components/Layout';
+import testHoc from '../lib/with-mobx';
 import '../styles/style.less'; // 全局式样
 
 class MyApp extends App {
-  static async getInitialProps({ Component, ctx }) {
+  static async getInitialProps(ctx) {
+    const { Component } = ctx;
     let pageProps = {};
 
     if (Component.getInitialProps) {
@@ -16,13 +18,15 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, mobxStore } = this.props as any;
+
+    console.log(mobxStore);
 
     return (
       <Container>
-        <Provider>
+        <Provider appState={mobxStore}>
             <Layout>
-            <Component {...pageProps} />
+                <Component {...pageProps} />
             </Layout>
         </Provider>
       </Container>
@@ -30,4 +34,4 @@ class MyApp extends App {
   }
 }
 
-export default MyApp;
+export default testHoc(MyApp);

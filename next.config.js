@@ -58,7 +58,10 @@ module.exports = withBundleAnalyzer(
     },
     webpack(config, { isServer }) {
       config.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/));
-    // console.log(config);
+      if (process.env.NODE_ENV === 'production') {
+        config.mode = 'production';
+      }
+    //   console.log(config);
       if (isServer) {
         const antStyles = /antd\/.*?\/style.*?/
         const origExternals = [...config.externals]
