@@ -6,5 +6,4 @@ NextJS-TypeScript
 2. NextJS
 3. TypeScript
 4. Mobx
-5. MongoDB
-6. Koa
+5. tslint

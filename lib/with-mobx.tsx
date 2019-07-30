@@ -1,16 +1,16 @@
 import React from 'react';
-import { AppState } from '../stores/store';
+import { createStoreMap } from '../store';
 
 const isServer = typeof window === 'undefined';
 const __NEXT_REDUX_STORE__ = '__NEXT_REDUX_STORE__';
 
 function getOrCreateStore(initialState? : any) {
     if (isServer) {
-        return new AppState(initialState);
+        return createStoreMap(initialState);
     }
 
     if (!window[__NEXT_REDUX_STORE__]) {
-        window[__NEXT_REDUX_STORE__] = new AppState(initialState);
+        window[__NEXT_REDUX_STORE__] = createStoreMap(initialState);
     }
     return window[__NEXT_REDUX_STORE__];
 }
@@ -32,11 +32,11 @@ export default (Comp: any) => {
                 ...rest
             } = (this.props as any);
 
+            // 自定义个page的props值
             if (pageProps) {
-                pageProps.test = '123';
+                // pageProps.test = '123';
             }
 
-            console.log('this.mobxStore', this.mobxStore);
             return (
                 <Comp
                     Component= { Component }
@@ -46,25 +46,25 @@ export default (Comp: any) => {
                 />
             );
         }
-    }
 
-    (WithMobxApp as any).getInitialProps = async (ctx: any) => {
-        let mobxStore;
+        static async getInitialProps(ctx: any) {
+            let mobxStore;
 
-        mobxStore = getOrCreateStore();
+            mobxStore = getOrCreateStore();
 
-        ctx.mobxStore = mobxStore;
+            ctx.mobxStore = mobxStore;
 
-        let appProps = {};
-        if (typeof Comp.getInitialProps === 'function') {
-            appProps = await Comp.getInitialProps(ctx);
+            let appProps = {};
+            if (typeof Comp.getInitialProps === 'function') {
+                appProps = await Comp.getInitialProps(ctx);
+            }
+
+            return {
+                ...appProps,
+                initialMobxState: mobxStore,
+            };
         }
-
-        return {
-            ...appProps,
-            initialMobxState: mobxStore,
-        };
-    };
+    }
 
     return WithMobxApp;
 };

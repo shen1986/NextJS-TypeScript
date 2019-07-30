@@ -20,11 +20,9 @@ class MyApp extends App {
   render() {
     const { Component, pageProps, mobxStore } = this.props as any;
 
-    console.log(mobxStore);
-
     return (
       <Container>
-        <Provider appState={mobxStore}>
+        <Provider {...mobxStore}>
             <Layout>
                 <Component {...pageProps} />
             </Layout>

@@ -1,6 +1,6 @@
 const webpack = require('webpack');
-const withLess = require('@zeit/next-less')
-const withBundleAnalyzer = require("@zeit/next-bundle-analyzer");
+const withLess = require('@zeit/next-less');
+const withBundleAnalyzer = require('@zeit/next-bundle-analyzer');
 // const config = require('./config');
 
 const configs = {
@@ -11,14 +11,14 @@ const configs = {
     // 页面内容缓存配置
     onDemandEntries: {
         // 内容在内存中缓存的时长(ms)
-        maxInactiveAge: 25*1000,
+        maxInactiveAge: 25 * 1000,
         // 同时缓存多少个页面
         pagesBufferLength: 2,
     },
     // 在pages目录下那种后缀的文件会被认为是页面
-    pageExtensions: ['tsx','jsx', 'js'],
+    pageExtensions: ['tsx', 'jsx', 'js'],
     // 配置buildId
-    generateBuildId: async() => {
+    generateBuildId: async () => {
         if (process.env.YOUR_BUILD_ID) {
             return process.env.YOUR_BUILD_ID;
         }
@@ -28,11 +28,11 @@ const configs = {
     },
     // 手动修改webpack config
     webpack(config, options) {
-        return config
+        return config;
     },
     // 修改webpackDevMiddleware配置
-    webpackDevMiddleware: config => {
-        return config
+    webpackDevMiddleware: (config) => {
+        return config;
     },
     // 可以在页面上通过 process.env.customKey 获取 value
     env: {
@@ -46,61 +46,69 @@ const configs = {
     },
     // 在服务端渲染和客户端渲染都可获取的配置
     publicRuntimeConfig: {
-        staticFolder: '/static'
+        staticFolder: '/static',
     },
-}
+};
 
 module.exports = withBundleAnalyzer(
-  withLess({
-    lessLoaderOptions: {
-      javascriptEnabled: true,
-      // modifyVars: themeVariables, // make your antd custom effective
-    },
-    webpack(config, { isServer }) {
-      config.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/));
-      if (process.env.NODE_ENV === 'production') {
-        config.mode = 'production';
-      }
-    //   console.log(config);
-      if (isServer) {
-        const antStyles = /antd\/.*?\/style.*?/
-        const origExternals = [...config.externals]
-        config.externals = [
-          (context, request, callback) => {
-            if (request.match(antStyles)) return callback()
-            if (typeof origExternals[0] === 'function') {
-              origExternals[0](context, request, callback)
-            } else {
-              callback()
+    withLess({
+        lessLoaderOptions: {
+            javascriptEnabled: true,
+            // modifyVars: themeVariables, // make your antd custom effective
+        },
+        webpack(config, { isServer }) {
+            config.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/));
+            if (process.env.NODE_ENV === 'production') {
+                config.mode = 'production';
             }
-          },
-          ...(typeof origExternals[0] === 'function' ? [] : origExternals),
-        ]
 
-        config.module.rules.unshift({
-          test: antStyles,
-          use: 'null-loader',
-        })
-      }
-      return config;
-    },
-    // publicRuntimeConfig: {
-    //   GITHUB_OAUTH_URL: config.GITHUB_OAUTH_URL,
-    //   OAUTH_URL: config.OAUTH_URL
-    // },
-    analyzeBrowser: ["browser", "both"].includes(process.env.BUNDLE_ANALYZE),
-    bundleAnalyzerConfig: {
-      server: {
-        analyzerMode: "static",
-        reportFilename: "../bundles/server.html"
-      },
-      browser: {
-        analyzerMode: "static",
-        reportFilename: "../bundles/client.html"
-      }
-    },
-    lessLoaderOptions: {
-      javascriptEnabled: true,
-    },
-  })
+            if (isServer) {
+                const antStyles = /antd\/.*?\/style.*?/;
+                const origExternals = [...config.externals];
+                config.externals = [
+                    (context, request, callback) => {
+                        if (request.match(antStyles)) return callback();
+                        if (typeof origExternals[0] === 'function') {
+                            origExternals[0](context, request, callback);
+                        } else {
+                            callback();
+                        }
+                    },
+                    ...(typeof origExternals[0] === 'function' ? [] : origExternals),
+                ];
+
+                config.module.rules.unshift({
+                    test: antStyles,
+                    use: 'null-loader',
+                });
+            }
+
+            // 加入tslint验证
+            config.module.rules.unshift({
+                test: /\.(ts|tsx)$/,
+                loader: 'tslint-loader',
+                enforce: 'pre',
+            });
+
+            return config;
+        },
+        // publicRuntimeConfig: {
+        //   GITHUB_OAUTH_URL: config.GITHUB_OAUTH_URL,
+        //   OAUTH_URL: config.OAUTH_URL
+        // },
+        analyzeBrowser: ['browser', 'both'].includes(process.env.BUNDLE_ANALYZE),
+        bundleAnalyzerConfig: {
+            server: {
+                analyzerMode: 'static',
+                reportFilename: '../bundles/server.html',
+            },
+            browser: {
+                analyzerMode: 'static',
+                reportFilename: '../bundles/client.html',
+            },
+        },
+        lessLoaderOptions: {
+            javascriptEnabled: true,
+        },
+    })
 );

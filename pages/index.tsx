@@ -18,10 +18,11 @@ class Home extends Component<any, any> {
 
     static async getInitialProps({ mobxStore }) {
 
-        const appState = mobxStore;
+        const appState = mobxStore.appState;
 
+        console.log('mobxStore', mobxStore);
         if (appState) {
-            appState.add();
+            appState.add(15);
         }
 
         return { };
